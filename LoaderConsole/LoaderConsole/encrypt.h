@@ -2,7 +2,7 @@
 #ifdef _KERNEL_MODE
 namespace std
 {
-	// STRUCT TEMPLATE remove_reference
+
 	template <class _Ty>
 	struct remove_reference {
 		using type = _Ty;
@@ -21,9 +21,8 @@ namespace std
 	template <class _Ty>
 	using remove_reference_t = typename remove_reference<_Ty>::type;
 
-	// STRUCT TEMPLATE remove_const
 	template <class _Ty>
-	struct remove_const { // remove top-level const qualifier
+	struct remove_const {
 		using type = _Ty;
 	};
 
@@ -58,7 +57,7 @@ namespace skc
 			return _storage;
 		}
 
-		__forceinline int size() // (w)char count
+		__forceinline int size()
 		{
 			return _size;
 		}
@@ -89,7 +88,7 @@ namespace skc
 			return _storage[_size - 1] != 0;
 		}
 
-		__forceinline void clear() // set full storage to 0
+		__forceinline void clear()
 		{
 			for (int i = 0; i < _size; i++)
 			{
