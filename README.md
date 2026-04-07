@@ -2,6 +2,8 @@
 
 Downloads encrypted shellcode into memory from a server and maps it into an x86 process without touching the disk. Barebones reflective loader with some extra features added over time.
 
+This **WILL** evade most games usermode anticheat systems, but not anything actively maintained. It will evade Overwatch Warden, Minecraft, Plutonium BO2, GTAV, and old Battlefield games (Punkbuster).
+
 ## Configuration
 
 Edit `Settings.h` before building:
