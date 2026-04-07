@@ -95,6 +95,22 @@ The scanner output below shows real detections from my personal anticheat projec
 ```
 These are just normal DLL loads so not really a detection, but the audit log shows the injector loading modules which creates a footprint.
 
+## IAT Hook Detection
+
+The anti-cheat also scans its own Import Address Table (IAT) to find modified API pointers. This caught our hooks immediately.
+
+### What is an IAT Hook
+
+When a program calls Windows APIs like `CreateProcessA` or `VirtualAlloc`, it doesn't call them directly. Instead it looks up the address in a table called the Import Address Table (IAT), then jumps there. An IAT hook replaces that address with a pointer to your own code, so you intercept every API call.
+
+### What Got Caught
+```cpp
+[DETECT] [INT-IAT] IAT hook: KERNEL32.dll!CreateProcessA -> 0x6978D1B0
+(expected in 0x75C20000-0x75D10000)
+```
+The anti-cheat expected `CreateProcessA` to point inside `kernel32.dll` (range 0x75C20000-0x75D10000), but found it pointing to 0x6978D1B0 - which is inside our injector's memory. This is instant detection because no legitimate software redirects core Windows APIs to external memory regions.
+
+Other hooks detected included `GetProcAddress`, `VirtualAlloc`, `CloseHandle`, and network functions in `WSOCK32.dll`. Basically every API we touched got flagged because we modified the IAT instead of using more stealthy hook methods like SSDT or inline hooks with proper obfuscation.
 ### Other Things That Will Get You Caught
 
 - **No control flow obfuscation** - the loader shellcode is straight line execution, easy to signature
