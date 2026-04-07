@@ -136,6 +136,7 @@
     <ClInclude Include="encrypt.h" />
     <ClInclude Include="inject.h" />
     <ClInclude Include="Stream.h" />
+    <ClInclude Include="settings.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="library_x64.lib" />
