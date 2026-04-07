@@ -60,7 +60,7 @@ This tool attempts some basic evasion techniques but it is **not** fully undetec
 
 ### What We Don't Do (And Why It Gets Caught)
 
-The scanner output below shows real detections from a basic security product. This tool does **not** evade these:
+The scanner output below shows real detections from my personal anticheat project, it injects a DLL and detects multiple vectors relaying to another process. This tool does **not** evade these:
 ```cpp
 [ VIRTUAL ADDRESS DESCRIPTOR SCAN ]
 19:09:56 [DETECT] [VAD] Executable private region @ 0x2fde0000 size=0x51000 protect=0x40
